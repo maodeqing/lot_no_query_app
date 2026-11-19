@@ -1,0 +1,30 @@
+批号批量查询器 · 使用说明
+==========================
+
+1. 输入批号，按 Enter 查询。
+2. 双击输入框可填入今日示例（YYMMDD-01）。
+3. 支持多个批号：用空格、逗号或分号分隔，如：
+   A001 A002
+   A001,A002
+   A001;A002
+4. 查询结果自动复制到剪贴板。
+5. 路径不对时，点右上角「⚙️ 设置」修改，或点「📂 打开配置」手动编辑 config.ini。
+
+数据源：\\192.168.1.12\生管\KDJL.xls
+
+step1: create venv
+python -m venv venv
+
+step2: 安裝包
+pip install pyinstaller pandas openpyxl xlrd PyQt5
+
+step3:打包
+pyinstaller --noconfirm --clean --onefile --windowed ^
+  --name "批量查询器" ^
+  --add-data "config.ini;." ^
+  --add-data "Help.txt;." ^
+  --add-data "requirements.txt;." ^
+  --collect-all pandas ^
+  --hidden-import openpyxl ^
+  --hidden-import xlrd ^
+  app.py  

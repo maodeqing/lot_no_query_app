@@ -1,0 +1,64 @@
+批号批量查询器 · 使用说明
+==========================
+
+1. 输入批号，按 Enter 查询。
+2. 双击输入框可填入今日示例（YYMMDD-01）。
+3. 支持多个批号：用空格、逗号或分号分隔，如：
+   A001 A002
+   A001,A002
+   A001;A002
+4. 查询结果自动复制到剪贴板。
+5. 路径不对时，点右上角「⚙️ 设置」修改，或点「📂 打开配置」手动编辑 config.ini。
+
+数据源：\\192.168.1.12\生管\KDJL.xls
+
+
+#or create a new repository on the command line
+
+echo "# lot_no_query_app" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/maodeqing/lot_no_query_app.git
+git push -u origin main
+git clone https://github.com/isick-cn/APS-System.git
+
+
+# push an existing repository from the command line
+git remote add origin https://github.com/maodeqing/lot_no_query_app.git
+git branch -M main
+git push -u origin main
+
+
+bash
+
+# 克隆倉庫
+git clone  https://gitee.com/maodeqing/lot_no_query_app.git (fetch)
+git clone  https://github.com/maodeqing/lot_no_query_app.git (fetch)
+
+# 进入后端目录
+cd app
+
+# 创建虚拟环境
+python -m venv venv
+
+# 激活虚拟环境
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 打包
+pyinstaller --noconfirm --clean --onefile --windowed ^
+  --name "批量查询器" ^
+  --add-data "config.ini;." ^
+  --add-data "Help.txt;." ^
+  --add-data "requirements.txt;." ^
+  --add-data "styles.qss;." ^
+  --hidden-import openpyxl ^
+  --hidden-import xlrd ^
+  app.py
